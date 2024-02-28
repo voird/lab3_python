@@ -36,6 +36,12 @@ class Pentagon(Shape):
         if side_length < 0:
             print("Значения длины должны быть положительными")
 
+        self.side_length = side_length
+
+    def area(self):
+        import math
+        return 0.25 * math.sqrt(5 * (5 + 2 * math.sqrt(5))) * self.side_length**2
+
 def compare(shape1, shape2):
     return shape1.area() - shape2.area()
 
@@ -95,9 +101,3 @@ elif area_comparison < 0:
     print("Прямоугольник меньше пятиугольника")
 else:
     print("Прямоугольник равен пятиугольнику")
-
-        self.side_length = side_length
-
-    def area(self):
-        import math
-        return 0.25 * math.sqrt(5 * (5 + 2 * math.sqrt(5))) * self.side_length**2
