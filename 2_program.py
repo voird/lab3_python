@@ -16,8 +16,7 @@ class Rectangle(Shape):
         self.add_vertex((x, y + width))
 
         if width < 0:
-            print("Значение ширины должно быть положительным")
-
+            raise ValueError("Значение ширины должно быть положительным")
         self.width = width
 
     def area(self):
@@ -34,8 +33,7 @@ class Pentagon(Shape):
             self.add_vertex((x + side_length * math.cos(angle + math.pi/2), y + side_length * math.sin(angle + math.pi/2)))
 
         if side_length < 0:
-            print("Значения длины должны быть положительными")
-
+            raise ValueError("Значения длины должны быть положительными")
         self.side_length = side_length
 
     def area(self):
@@ -47,7 +45,7 @@ def compare(shape1, shape2):
 
 def is_include(shape1, shape2):
     if not isinstance(shape1, Rectangle) or not isinstance(shape2, Pentagon):
-        print("Оба объекта должны быть экземплярами соответствующих классов")
+        raise ValueError("Оба объекта должны быть экземплярами соответствующих классов")
 
     for vertex in shape1.vertices:
         if not is_point_inside_polygon(vertex, shape2.vertices):
@@ -74,20 +72,24 @@ def is_point_inside_polygon(point, polygon_vertices):
 
     return inside
 
-print("Введите значения x, y, w для прямоугольника: ")
-x = int(input("x: "))
-y = int(input("y: "))
-w = int(input("w: "))
-rectangle1 = Rectangle("R1", x, y, w)
+try:
+    print("Введите значения x, y, w для прямоугольника: ")
+    x = int(input("x: "))
+    y = int(input("y: "))
+    w = int(input("w: "))
+    rectangle1 = Rectangle("R1", x, y, w)
 
-print("Введите значения x, y, l для пятиугольника: ")
-x = int(input("x: "))
-y = int(input("y: "))
-l = int(input("l: "))
-pentagon1 = Pentagon("P1", x, y, l)
+    print("Введите значения x, y, l для пятиугольника: ")
+    x = int(input("x: "))
+    y = int(input("y: "))
+    l = int(input("l: "))
+    pentagon1 = Pentagon("P1", x, y, l)
 
-print("Прямоугольник :", rectangle1.area())
-print("Пятиугольник:", pentagon1.area())
+    print("Прямоугольник :", rectangle1.area())
+    print("Пятиугольник:", pentagon1.area())
+
+except ValueError as e:
+    print("Ошибка: ", str(e))
 
 if is_include(rectangle1, pentagon1):
     print("Прямоугольник включен в пятиугольник")
