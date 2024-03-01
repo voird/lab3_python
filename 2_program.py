@@ -1,3 +1,7 @@
+#Работа с объектами двух типов: Rectangle, Pentagon
+#Реализация двух функций: is_include, compare (сравнение обхектов по площади)
+#Добавление обработки исключений
+
 class Shape:
     def __init__(self, identifier):
         self.identifier = identifier
